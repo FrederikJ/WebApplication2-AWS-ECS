@@ -11,6 +11,8 @@ COPY ["WebApplication2-AWS-ECS/WebApplication2-AWS-ECS.csproj", "WebApplication2
 RUN dotnet restore "WebApplication2-AWS-ECS/WebApplication2-AWS-ECS.csproj"
 COPY . .
 WORKDIR "/src/WebApplication2-AWS-ECS"
+
+FROM build AS build
 RUN dotnet build "WebApplication2-AWS-ECS.csproj" -c Release -o /app/build
 
 FROM build AS publish
