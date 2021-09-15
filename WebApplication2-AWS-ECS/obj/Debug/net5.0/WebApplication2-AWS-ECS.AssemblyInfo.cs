@@ -11,6 +11,7 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("f468864f-826c-4fdc-9855-60d0f5913de9")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("WebApplication2-AWS-ECS")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]

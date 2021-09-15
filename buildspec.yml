@@ -1,0 +1,30 @@
+# AWS CodeBuild spec to build an Elastic Beanstalk artifact for AWS CodePipeline to deploy
+version: 0.2
+    
+phases:   
+  install:
+    runtime-versions:
+      docker: 19
+      
+  pre_build:
+    commands:
+      - ECR_URI=043910265317.dkr.ecr.eu-west-2.amazonaws.com
+      - IMAGE_NAME="webapp2"
+      - echo Installing ECS Tools...
+      - dotnet tool install -g Amazon.ECS.Tools
+      
+  build:
+    commands:
+      - echo Build started on `date`
+      - cd ./WebApplication2-AWS-ECS
+      - dotnet ecs push-image $REPOSITORY_URI --tag $IMAGE_NAME
+      
+  post_build:
+    commands:
+      - echo Writing image definitions file...
+      - printf '[{"name":"container","imageUri":"%s"}]' $ECR_URI/$IMAGE_NAME > imagedefinitions.json
+
+artifacts:
+  files: ./WebApplication2-AWS-ECS/imagedefinitions.json
+  discard-paths: yes
+
