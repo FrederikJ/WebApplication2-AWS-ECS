@@ -17,7 +17,7 @@ phases:
     commands:
       - echo Build started on `date`
       - cd ./WebApplication2-AWS-ECS
-      - dotnet ecs push-image $ECR_URI --tag $IMAGE_NAME
+      - docker push $ECR_URI/$IMAGE_NAME:latest
       
   post_build:
     commands:
